@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Black November Festly: profissionalize a gestão do seu espaço e lote sua agenda no verão. SaaS gratuito + marketplace de serviços.">
+<title>Black November Festly | Lote Seu Espaço no Verão</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  /* ============ RESET & BASE ============ */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy-900: #071326;
+    --navy-800: #0B1B33;
+    --navy-700: #112240;
+    --cyan-neon: #00E5FF;
+    --cyan-soft: #4DD9E8;
+    --coral: #FF5A4A;
+    --coral-hover: #FF7366;
+    --white: #FFFFFF;
+    --gray-100: #E6ECF5;
+    --gray-300: #B8C4D6;
+    --gray-500: #7A8BA8;
+    --radius: 14px;
+    --shadow-glow: 0 0 40px rgba(0, 229, 255, 0.15);
+    --shadow-coral: 0 10px 30px rgba(255, 90, 74, 0.35);
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--navy-900);
+    color: var(--white);
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { text-decoration: none; color: inherit; }
+  img, svg { max-width: 100%; display: block; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+  /* ============ BACKGROUND GEOMÉTRICO ============ */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(0, 229, 255, 0.08), transparent 40%),
+      radial-gradient(circle at 85% 80%, rgba(255, 90, 74, 0.06), transparent 45%),
+      linear-gradient(180deg, var(--navy-900) 0%, var(--navy-800) 100%);
+    z-index: -2;
+  }
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0, 229, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 229, 255, 0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    z-index: -1;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+  }
+
+  /* ============ HEADER ============ */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(14px);
+    background: rgba(7, 19, 38, 0.75);
+    border-bottom: 1px solid rgba(0, 229, 255, 0.12);
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 0;
+  }
+  .logo {
+    font-size: 26px;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .logo-svg {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+  }
+  .logo-text {
+    background: linear-gradient(135deg, #00E5FF 0%, #0077FF 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .nav { display: flex; align-items: center; gap: 32px; }
+  .nav-links { display: flex; gap: 28px; list-style: none; }
+  .nav-links a {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--gray-300);
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--cyan-neon); }
+  .btn-owner {
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px 20px;
+    border: 1px solid rgba(0, 229, 255, 0.4);
+    border-radius: 8px;
+    color: var(--cyan-neon);
+    transition: all 0.25s;
+  }
+  .btn-owner:hover {
+    background: rgba(0, 229, 255, 0.1);
+    border-color: var(--cyan-neon);
+    box-shadow: 0 0 20px rgba(0, 229, 255, 0.25);
+  }
+
+  /* ============ HERO ============ */
+  .hero { padding: 80px 0 100px; position: relative; }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: rgba(0, 229, 255, 0.08);
+    border: 1px solid rgba(0, 229, 255, 0.3);
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--cyan-neon);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 24px;
+  }
+  .badge-dot {
+    width: 8px; height: 8px;
+    background: var(--coral);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--coral);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.2); }
+  }
+  .hero h1 {
+    font-size: clamp(34px, 5vw, 56px);
+    font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: -1.5px;
+    margin-bottom: 24px;
+  }
+  .hero h1 .highlight {
+    background: linear-gradient(135deg, var(--cyan-neon) 0%, #4DD9E8 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero h1 .coral-text {
+    background: linear-gradient(135deg, var(--coral) 0%, #FF8A7A 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero-sub {
+    font-size: 18px;
+    color: var(--gray-300);
+    margin-bottom: 36px;
+    max-width: 560px;
+  }
+  .cta-group { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 18px 32px;
+    background: var(--coral);
+    color: var(--white);
+    font-size: 15px;
+    font-weight: 700;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s;
+    box-shadow: var(--shadow-coral);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .btn-primary:hover {
+    background: var(--coral-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 36px rgba(255, 90, 74, 0.45);
+  }
+  .btn-primary svg { transition: transform 0.25s; }
+  .btn-primary:hover svg { transform: translateX(4px); }
+  .hero-proof {
+    margin-top: 36px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 13px;
+    color: var(--gray-500);
+  }
+  .avatars { display: flex; }
+  .avatar {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: 2px solid var(--navy-900);
+    margin-left: -10px;
+    background: linear-gradient(135deg, var(--cyan-neon), #0077FF);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .avatar:first-child { margin-left: 0; }
+
+  /* ============ MOCKUP DASHBOARD ============ */
+  .hero-visual { position: relative; perspective: 1500px; }
+  .mockup-main {
+    background: linear-gradient(145deg, var(--navy-700), var(--navy-800));
+    border: 1px solid rgba(0, 229, 255, 0.2);
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: var(--shadow-glow), 0 30px 60px rgba(0, 0, 0, 0.5);
+    transform: rotateY(-6deg) rotateX(3deg);
+    transition: transform 0.4s;
+  }
+  .mockup-main:hover { transform: rotateY(0) rotateX(0); }
+  .mockup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    margin-bottom: 16px;
+  }
+  .mockup-title { font-size: 13px; font-weight: 600; color: var(--gray-300); }
+  .mockup-dots { display: flex; gap: 6px; }
+  .mockup-dots span {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+  }
+  .mockup-dots span:first-child { background: var(--coral); }
+  .mockup-dots span:nth-child(2) { background: #FFC857; }
+  .mockup-dots span:nth-child(3) { background: var(--cyan-neon); }
+
+  .revenue-card {
+    background: rgba(0, 229, 255, 0.06);
+    border: 1px solid rgba(0, 229, 255, 0.2);
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 14px;
+  }
+  .revenue-label { font-size: 11px; color: var(--gray-500); text-transform: uppercase; letter-spacing: 1px; }
+  .revenue-value {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--white);
+    margin-top: 4px;
+  }
+  .revenue-value .cents { font-size: 18px; color: var(--gray-300); }
+  .revenue-change {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #4ADE80;
+  }
+
+  .chart-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    height: 90px;
+    margin-top: 12px;
+  }
+  .bar {
+    flex: 1;
+    background: linear-gradient(180deg, var(--cyan-neon), rgba(0, 229, 255, 0.3));
+    border-radius: 4px 4px 0 0;
+    position: relative;
+    transition: all 0.3s;
+  }
+  .bar:hover { filter: brightness(1.2); }
+  .bar.accent { background: linear-gradient(180deg, var(--coral), rgba(255, 90, 74, 0.3)); }
+
+  .bookings-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 12px;
+  }
+  .bookings-row:first-of-type { border-top: none; }
+  .booking-name { color: var(--gray-100); font-weight: 500; }
+  .booking-status {
+    padding: 3px 10px;
+    border-radius: 100px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .status-confirmed { background: rgba(74, 222, 128, 0.15); color: #4ADE80; }
+  .status-pending { background: rgba(255, 200, 87, 0.15); color: #FFC857; }
+
+  /* Floating cards */
+  .float-card {
+    position: absolute;
+    background: var(--navy-700);
+    border: 1px solid rgba(0, 229, 255, 0.25);
+    border-radius: 12px;
+    padding: 14px 18px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    animation: float 4s ease-in-out infinite;
+  }
+  .float-card-1 {
+    top: -20px;
+    right: -30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .float-card-2 {
+    bottom: 30px;
+    left: -40px;
+    animation-delay: 1.5s;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+  .float-icon {
+    width: 34px; height: 34px;
+    border-radius: 8px;
+    background: rgba(0, 229, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--cyan-neon);
+  }
+  .float-label { font-size: 10px; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.5px; }
+  .float-value { font-size: 15px; font-weight: 700; }
+
+  /* ============ SECTIONS ============ */
+  section { padding: 100px 0; position: relative; }
+  .section-head { text-align: center; max-width: 720px; margin: 0 auto 64px; }
+  .section-eyebrow {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--cyan-neon);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-size: clamp(30px, 4vw, 44px);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -1px;
+    margin-bottom: 18px;
+  }
+  .section-sub { font-size: 17px; color: var(--gray-300); }
+
+  /* ============ DOR/SOLUÇÃO ============ */
+  .pain-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .pain-card {
+    background: linear-gradient(145deg, rgba(17, 34, 64, 0.8), rgba(11, 27, 51, 0.6));
+    border: 1px solid rgba(0, 229, 255, 0.12);
+    border-radius: var(--radius);
+    padding: 36px 30px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+  .pain-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--cyan-neon), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .pain-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(0, 229, 255, 0.35);
+    box-shadow: var(--shadow-glow);
+  }
+  .pain-card:hover::before { opacity: 1; }
+  .pain-icon {
+    width: 56px; height: 56px;
+    border-radius: 14px;
+    background: rgba(0, 229, 255, 0.1);
+    border: 1px solid rgba(0, 229, 255, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--cyan-neon);
+    margin-bottom: 24px;
+  }
+  .pain-card h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+  .pain-card p {
+    font-size: 15px;
+    color: var(--gray-300);
+    line-height: 1.65;
+  }
+  .pain-tag {
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--coral);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+
+  /* ============ ECOSISTEMA ============ */
+  .eco-section {
+    background: linear-gradient(180deg, transparent 0%, rgba(0, 229, 255, 0.03) 50%, transparent 100%);
+  }
+  .eco-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+  }
+  .eco-card {
+    background: rgba(11, 27, 51, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 28px 22px;
+    text-align: center;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+  .eco-card:hover {
+    background: rgba(0, 229, 255, 0.05);
+    border-color: rgba(0, 229, 255, 0.3);
+    transform: translateY(-4px);
+  }
+  .eco-icon {
+    width: 52px; height: 52px;
+    margin: 0 auto 16px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, rgba(0, 229, 255, 0.15), rgba(0, 119, 255, 0.15));
+    border: 1px solid rgba(0, 229, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--cyan-neon);
+  }
+  .eco-card h4 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .eco-card p {
+    font-size: 12px;
+    color: var(--gray-500);
+    line-height: 1.5;
+  }
+
+  /* ============ FINAL CTA ============ */
+  .final-cta {
+    text-align: center;
+    padding: 100px 0 120px;
+  }
+  .final-cta-box {
+    background: linear-gradient(145deg, rgba(0, 229, 255, 0.08), rgba(255, 90, 74, 0.04));
+    border: 1px solid rgba(0, 229, 255, 0.25);
+    border-radius: 24px;
+    padding: 72px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .final-cta-box::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 0%, rgba(0, 229, 255, 0.15), transparent 60%);
+    pointer-events: none;
+  }
+  .final-cta h2 {
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 18px;
+    letter-spacing: -1px;
+    position: relative;
+  }
+  .final-cta p {
+    font-size: 17px;
+    color: var(--gray-300);
+    margin-bottom: 36px;
+    max-width: 580px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+  }
+  .final-cta .btn-primary { position: relative; }
+
+  /* ============ FOOTER ============ */
+  .footer {
+    border-top: 1px solid rgba(0, 229, 255, 0.1);
+    padding: 48px 0 32px;
+    background: rgba(7, 19, 38, 0.6);
+  }
+  .footer-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+  .footer-links { display: flex; gap: 28px; list-style: none; }
+  .footer-links a {
+    font-size: 13px;
+    color: var(--gray-500);
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--cyan-neon); }
+  .footer-badges { display: flex; gap: 12px; }
+  .footer-badge {
+    padding: 6px 12px;
+    border: 1px solid rgba(0, 229, 255, 0.2);
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--cyan-neon);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .footer-contact {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--gray-300);
+    margin-bottom: 20px;
+  }
+  .footer-contact a {
+    color: var(--cyan-neon);
+    font-weight: 600;
+    transition: color 0.2s;
+  }
+  .footer-contact a:hover {
+    color: var(--coral);
+  }
+  .footer-bottom {
+    text-align: center;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 12px;
+    color: var(--gray-500);
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 960px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 60px; }
+    .pain-grid { grid-template-columns: 1fr; }
+    .eco-grid { grid-template-columns: repeat(2, 1fr); }
+    .nav-links { display: none; }
+    .float-card-1 { right: 0; }
+    .float-card-2 { left: 0; }
+  }
+  @media (max-width: 560px) {
+    .eco-grid { grid-template-columns: 1fr; }
+    .final-cta-box { padding: 48px 24px; }
+    section { padding: 70px 0; }
+    .footer-grid { flex-direction: column; text-align: center; }
+    .footer-links { flex-wrap: wrap; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header class="header">
+  <div class="container header-inner">
+    <a href="#" class="logo">
+      <svg class="logo-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 3L2 12H5V21H19V12H22L12 3Z" fill="#00E5FF" stroke="#00E5FF" stroke-width="1.5" stroke-linejoin="round"/>
+        <rect x="9" y="15" width="6" height="6" fill="#071326"/>
+      </svg>
+      <span class="logo-text">FESTLY</span>
+    </a>
+    <nav class="nav">
+      <ul class="nav-links">
+        <li><a href="#solucao">Solução</a></li>
+        <li><a href="#ecosistema">Ecossistema</a></li>
+        <li><a href="#black">Black November</a></li>
+      </ul>
+      <a href="https://proprietario.festly.app.br/" class="btn-owner">Área do Proprietário</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="badge">
+          <span class="badge-dot"></span>
+          Black November • Vagas Limitadas
+        </div>
+        <h1>
+          <span class="coral-text">BLACK NOVEMBER</span> FESTLY:<br>
+          O Momento Definitivo para <span class="highlight">Lotar o Seu Espaço</span> no Verão.
+        </h1>
+        <p class="hero-sub">
+          Aproveite a maior data de conversão do ano para profissionalizar sua gestão, eliminar o caos do WhatsApp e antecipar suas reservas de temporada com tecnologia de ponta.
+        </p>
+        <div class="cta-group">
+          <a href="https://proprietario.festly.app.br/" class="btn-primary">
+            Garantir Vaga na Black November
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+        <div class="hero-proof">
+          <div class="avatars">
+            <div class="avatar">R</div>
+            <div class="avatar">M</div>
+            <div class="avatar">J</div>
+            <div class="avatar">+</div>
+          </div>
+          <span><strong style="color: var(--white);">+200 proprietários</strong> já profissionalizaram a gestão com a Festly</span>
+        </div>
+      </div>
+
+      <!-- MOCKUP DASHBOARD -->
+      <div class="hero-visual">
+        <div class="mockup-main">
+          <div class="mockup-header">
+            <span class="mockup-title">Dashboard • Receita Nov/Dez</span>
+            <div class="mockup-dots"><span></span><span></span><span></span></div>
+          </div>
+          <div class="revenue-card">
+            <div class="revenue-label">Faturamento Previsto</div>
+            <div class="revenue-value">R$ 48.720<span class="cents">,00</span></div>
+            <div class="revenue-change">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="18 15 12 9 6 15"/></svg>
+              +38% vs. novembro
+            </div>
+          </div>
+          <div class="chart-bars">
+            <div class="bar" style="height: 40%"></div>
+            <div class="bar" style="height: 55%"></div>
+            <div class="bar" style="height: 45%"></div>
+            <div class="bar" style="height: 70%"></div>
+            <div class="bar accent" style="height: 95%"></div>
+            <div class="bar" style="height: 80%"></div>
+            <div class="bar" style="height: 65%"></div>
+          </div>
+          <div style="margin-top: 20px;">
+            <div class="bookings-row">
+              <span class="booking-name">Churrasqueira Premium • 22/12</span>
+              <span class="booking-status status-confirmed">Confirmada</span>
+            </div>
+            <div class="bookings-row">
+              <span class="booking-name">Salão + Telão • Final Copa</span>
+              <span class="booking-status status-confirmed">Confirmada</span>
+            </div>
+            <div class="bookings-row">
+              <span class="booking-name">Área Piscina • 30/12</span>
+              <span class="booking-status status-pending">Pendente</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="float-card float-card-1">
+          <div class="float-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div>
+            <div class="float-label">Contrato Emitido</div>
+            <div class="float-value">Automático</div>
+          </div>
+        </div>
+        <div class="float-card float-card-2">
+          <div class="float-icon" style="background: rgba(255, 90, 74, 0.15); color: var(--coral);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <div>
+            <div class="float-label">Reservas Dezembro</div>
+            <div class="float-value">+27 novas</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DOR vs SOLUÇÃO ============ -->
+<section id="solucao">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-eyebrow">Por que a Black November Festly?</span>
+      <h2 class="section-title">Pare de perder dinheiro enquanto o verão chega.</h2>
+      <p class="section-sub">Três verdades que todo proprietário precisa encarar antes da alta temporada — e como a Festly resolve cada uma delas em menos de 5 minutos.</p>
+    </div>
+
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        </div>
+        <h3>O Fim do WhatsApp Arcaico</h3>
+        <p>Chega de responder a mesma pergunta 40 vezes por dia, perder conversas em grupos e ver clientes sumindo enquanto você digita "já te mando o Pix". Cada minuto no WhatsApp é dinheiro queimado.</p>
+        <span class="pain-tag">→ Substituído por automação total</span>
+      </div>
+
+      <div class="pain-card">
+        <div class="pain-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <h3>Verão e Jogos = Dinheiro na Mesa</h3>
+        <p>De dezembro a fevereiro, e em cada final de campeonato, seu espaço vazio é prejuízo visível. Enquanto você espera o "cliente ideal", concorrentes já estão com a agenda lotada desde outubro.</p>
+        <span class="pain-tag">→ Antecipe reservas com 60 dias</span>
+      </div>
+
+      <div class="pain-card">
+        <div class="pain-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <h3>Festly V1: Gestão Completa, Zero Mensalidade</h3>
+        <p>Agenda organizada, contratos emitidos automaticamente, pagamentos seguros e comprovantes na palma da mão. Tudo isso sem mensalidade fixa. Você só ganha quando o cliente paga.</p>
+        <span class="pain-tag">→ 100% gratuito para proprietários</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ECOSISTEMA ============ -->
+<section id="ecosistema" class="eco-section">
+  <div class="container">
+    <div class="section-head">
+      <span class="section-eyebrow">Ecossistema Completo</span>
+      <h2 class="section-title">Não é só um anúncio. É a festa inteira fechada em um clique.</h2>
+      <p class="section-sub">Enquanto marketplaces comuns mostram apenas o espaço, a Festly conecta seu cliente a 8 categorias essenciais de serviços — e você ganha comissão em cada um.</p>
+    </div>
+
+    <div class="eco-grid">
+      <div class="eco-card">
+        <div class="eco-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+        </div>
+        <h4>Buffet</h4>
+        <p>Cardápios prontos para cada tipo de evento</p>
+      </div>
+      <div class="eco-card">
+        <div class="eco-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="15.5" r="2.5"/><path d="M3 8l6-4 4 6 8-2v8"/><line x1="8" y1="17" x2="8" y2="10"/></svg>
+        </div>
+        <h4>DJ & Som</h4>
+        <p>DJs verificados com equipamento profissional</p>
+      </div>
+      <div class="eco-card">
+        <div class="eco-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l8-4 8 4v14"/><path d="M9 21v-6h6v6"/></svg>
+        </div>
+        <h4>Limpeza</h4>
+        <p>Equipes ágeis pré e pós-evento</p>
+      </div>
+      <div class="eco-card">
+        <div class="eco-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h4>Segurança</h4>
+        <p>Profissionais certificados para eventos</p>
+      </div>
+      <div class="eco-card">
+        <div class="eco-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+        </div>
+        <h4>Churrasqueiro</h4>
+        <p>Mestres do brasa com insumos inclusos</p>
+      </div>
+      <div class="eco-card">
+        <div class="eco-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="15" rx="2" ry="2"/><polyline points="17 2 12 7 7 2"/></svg>
+        </div>
+        <h4>Telão para Jogos</h4>
+        <p>Projeção 4K para finais e clássicos</p>
+      </div>
+      <div class="eco-card">
+        <div class="eco-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <h4>Decoração</h4>
+        <p>Cenários personalizados sob demanda</p>
+      </div>
+      <div class="eco-card">
+        <div class="eco-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        </div>
+        <h4>Fotografia</h4>
+        <p>Registros profissionais do evento</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="final-cta" id="black">
+  <div class="container">
+    <div class="final-cta-box">
+      <h2>Sua agenda de verão começa <span style="color: var(--cyan-neon);">hoje</span>.<br>Não em janeiro.</h2>
+      <p>As vagas da Black November Festly são limitadas e priorizam proprietários que querem lotar a agenda antes da corrida de dezembro. Cadastre seu espaço agora — é 100% grátis.</p>
+      <a href="https://proprietario.festly.app.br/" class="btn-primary">
+        Cadastrar Meu Espaço Grátis
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-contact">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+  </svg>
+  <span>WhatsApp: <a href="https://wa.me/5545999070958?text=Olá!%20Vim%20pela%20Black%20November%20Festly%20e%20quero%20saber%20mais%20sobre%20o%20cadastro%20do%20meu%20espaço." target="_blank">+55 45 99907-0958</a></span>
+</div>
+    <div class="footer-grid">
+      <a href="#" class="logo">
+        <svg class="logo-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 3L2 12H5V21H19V12H22L12 3Z" fill="#00E5FF" stroke="#00E5FF" stroke-width="1.5" stroke-linejoin="round"/>
+          <rect x="9" y="15" width="6" height="6" fill="#071326"/>
+        </svg>
+        <span class="logo-text">FESTLY</span>
+      </a>
+      <ul class="footer-links">
+        <li><a href="/termos">Termos de Uso</a></li>
+        <li><a href="/privacidade">Política de Privacidade</a></li>
+        <li><a href="/contato">Contato</a></li>
+      </ul>
+      <div class="footer-badges">
+        <span class="footer-badge">SSL Seguro</span>
+        <span class="footer-badge">LGPD</span>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2026 Festly. Todos os direitos reservados. Feito para proprietários que querem faturar de verdade.
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
